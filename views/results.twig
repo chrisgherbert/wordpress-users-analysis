@@ -1,0 +1,63 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+	<h4>Data for {{ url }}</h4>
+
+	{% if error %}
+		<div class="alert alert-danger">
+			{{ error }}
+		</div>
+	{% endif %}
+
+	<hr>
+
+	<h4>Found {{ users|length }} Users</h4>
+
+	<table class="table">
+
+		<thead>
+
+			<tr>
+				<th>Name</th>
+				<th>ID</th>
+				<th>Posts Link</th>
+				<th>Avatar</th>
+				<th>Description</th>
+				<th>Email</th>
+			</tr>
+
+		</thead>
+
+		<tbody>
+
+			{% for user in users %}
+
+				<tr>
+					<td><strong>{{ user.name }}</strong> ({{ user.slug }})</td>
+					<td>{{ user.id }}</td>
+					<td>
+						{% if user.link %}
+							<a href="{{ user.link }}">{{ user.link }}</a>
+						{% endif %}
+					</td>
+					<td>
+						{% if user.avatar_urls.48 %}
+							<a href="{{ user.avatar_urls.500 }}">
+								<img src="{{ user.avatar_urls.48 }}">
+							</a>
+						{% endif %}
+					</td>
+					<td>
+						{{ user.description|raw }}
+					</td>
+					<td>{{ user.email }}</td>
+				</tr>
+
+			{% endfor %}
+
+		</tbody>
+
+	</table>
+
+{% endblock %}

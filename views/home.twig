@@ -1,0 +1,16 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+
+	<form action="/search" method="GET">
+
+		<div class="form-group">
+			<label for="site_url">Site URL</label>
+			<input class="form-control" type="text" name="site_url" placeholder="http://site.com">
+		</div>
+
+		<button class="btn btn-primary" type="submit">Submit</button>
+
+	</form>
+
+{% endblock %}

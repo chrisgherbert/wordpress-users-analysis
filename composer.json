@@ -1,0 +1,16 @@
+{
+    "name": "cherbert/wordpress-users-tool",
+    "authors": [
+        {
+            "name": "Chris Herbert",
+            "email": "herbert@bermanco.com"
+        }
+    ],
+    "require": {
+        "curl/curl": "^1.8",
+        "twig/twig": "^2.4",
+        "klein/klein": "^2.1",
+        "vlucas/phpdotenv": "^2.4",
+        "catfan/Medoo": "^1.4"
+    }
+}
