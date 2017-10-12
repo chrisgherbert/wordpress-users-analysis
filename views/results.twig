@@ -43,7 +43,7 @@
 					</td>
 					<td>
 						{% if user.avatar_urls.48 %}
-							<a href="{{ user.avatar_urls.500 }}">
+							<a href="{{ user.avatar_urls.48|replace({'s=48': 's=800'}) }}">
 								<img src="{{ user.avatar_urls.48 }}">
 							</a>
 						{% endif %}
