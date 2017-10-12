@@ -1,0 +1,93 @@
+<?php
+
+/** Configuration */
+
+$remote_directory = '/var/www/html/nowaysantafe.com';
+$ssh_user = 'herbert';
+$ssh_host = 'linode';
+
+$theme_directory = './web/app/themes/nowaysantafe';
+
+/** Stop editing */
+
+$local_site_directory = '.';
+
+$excluded_files = array(
+	'*.DS_Store',
+	'deploy-to-*.php',
+	'.htaccess',
+	'.env',
+	'.git',
+	'.gitignore',
+	'.travis.yml',
+	'composer.json',
+	'composer.lock',
+	'keys',
+	'ruleset.xml',
+	'README.md',
+	'LICENSE.md',
+	'CONTRIBUTING.md',
+	'CHANGELOG.md',
+	'web/app/uploads',
+	"$theme_directory/assets/js",
+	"$theme_directory/assets/scss",
+	"$theme_directory/gulpfile.babel.js",
+	"$theme_directory/gulpvars.js",
+	"$theme_directory/node_modules",
+	"$theme_directory/package.json",
+	"$theme_directory/bower.json",
+	"$theme_directory/composer.json",
+	"$theme_directory/composer.lock",
+	"$theme_directory/devvars.js",
+	"$theme_directory/.bowerrc",
+	"$theme_directory/.gitignore",
+	"$theme_directory/bin",
+	"$theme_directory/tests",
+	"web/app/plugins/timber/cache",
+
+	// W3 Total Cache junk
+	'web/app/advanced-cache.php',
+	'web/app/cache',
+	'web/app/object-cache.php',
+	'web/app/db.php',
+	'web/app/w3tc-config',
+	'web/app/plugins/w3tc-wp-loader.php',
+
+	// WP Super Cache Junk
+	'web/app/wp-cache-config.php',
+
+);
+
+////////////////////////
+// Stop editing here! //
+////////////////////////
+
+function build_rysnc_exclusion(array $excluded_files){
+
+	$command_array = array();
+
+	foreach ($excluded_files as $file){
+		$command_array[] = "--exclude=$file";
+	}
+
+	return implode(' ', $command_array);
+
+}
+
+$excluded_files_string = build_rysnc_exclusion($excluded_files);
+
+$create_dir = "sudo mkdir $remote_directory";
+$change_ownership_to_user = "sudo chown -R {$ssh_user}: $remote_directory";
+$change_ownership_to_apache = "sudo chown -R apache: $remote_directory";
+
+echo '** Building Project **' . "\r\n";
+echo shell_exec("php build-project.php");
+
+echo '** Starting deployment process **' . "\r\n";
+
+echo '** Syncing changes **' . "\r\n";
+echo shell_exec("ssh -t $ssh_user@$ssh_host '$change_ownership_to_user'");
+echo shell_exec("rsync -avz $excluded_files_string $local_site_directory $ssh_user@$ssh_host:'$remote_directory'");
+echo shell_exec("ssh -t $ssh_user@$ssh_host '$change_ownership_to_apache'");
+echo 'Complete';
+
