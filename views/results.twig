@@ -42,7 +42,7 @@
 
 			{% for user in site.users %}
 
-				<tr>
+				<tr {% if user.email %}class="success"{% endif %}>
 					<td>
 						<a href="{{ user.avatar(500) }}">
 							<img src="{{ user.avatar(30) }}">
