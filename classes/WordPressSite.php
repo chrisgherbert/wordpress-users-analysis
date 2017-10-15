@@ -21,9 +21,9 @@ class WordPressSite {
 
 		$curl = self::get_curl();
 
-		error_log($this->get_users_endpoint_url());
+		$endpoint = $this->get_users_endpoint_url() . '?' . http_build_query(['per_page' => 100]);
 
-		$curl->get($this->get_users_endpoint_url());
+		$curl->get($endpoint);
 
 		if ($curl->error) {
 			error_log('Error: ' . $curl->error_code . ': ' . $curl->error_message);

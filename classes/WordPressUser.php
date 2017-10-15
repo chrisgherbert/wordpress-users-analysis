@@ -3,7 +3,7 @@
 class WordPressUser {
 
 	public $data;
-	public $email;
+	public $reversed_email;
 
 	public function __construct($data){
 		$this->data = $data;
@@ -75,11 +75,11 @@ class WordPressUser {
 
 	public function email(){
 
-		if (isset($this->email)){
-			return $this->email;
+		if (isset($this->reversed_email)){
+			return $this->reversed_email;
 		}
 
-		$hash = $this->get_email_hash();
+		$hash = $this->email_hash();
 
 		if (!$hash){
 			return false;
@@ -87,9 +87,9 @@ class WordPressUser {
 
 		$email = EmailHashReverser::reverse($hash);
 
-		$this->email = $email;
+		$this->reversed_email = $email;
 
-		return $this->email;
+		return $this->reversed_email;
 
 	}
 
