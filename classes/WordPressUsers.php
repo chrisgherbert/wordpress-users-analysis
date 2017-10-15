@@ -12,8 +12,8 @@ class WordPressUsers {
 
 	public function get_data(){
 
-		$curl = new Curl;
-		$curl->setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Safari/604.1.38');
+		$curl = $this->get_curl();
+
 		$curl->get($this->get_users_rest_endpoint());
 
 		if ($curl->error) {
@@ -64,6 +64,19 @@ class WordPressUsers {
 		$endpoint = self::untrailingslashit($url) . '/wp-json/wp/v2/users?per_page=100';
 
 		return $endpoint;
+
+	}
+
+	protected static function get_curl(){
+
+		$curl = new Curl;
+		$curl->setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13) AppleWebKit/604.1.38 (KHTML, like Gecko) Version/11.0 Safari/604.1.38');
+		$curl->setOpt(CURLOPT_SSL_VERIFYHOST, 0);
+		$curl->setOpt(CURLOPT_SSL_VERIFYPEER, 0);
+		$curl->setOpt(CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_0);
+		$curl->setOpt(CURLOPT_SSL_CIPHER_LIST, 'TLSv1');
+
+		return $curl;
 
 	}
 
