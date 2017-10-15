@@ -2,11 +2,9 @@
 
 /** Configuration */
 
-$remote_directory = '/var/www/html/nowaysantafe.com';
-$ssh_user = 'herbert';
-$ssh_host = 'linode';
-
-$theme_directory = './web/app/themes/nowaysantafe';
+$remote_directory = '';
+$ssh_user = '';
+$ssh_host = '';
 
 /** Stop editing */
 
@@ -25,37 +23,6 @@ $excluded_files = array(
 	'keys',
 	'ruleset.xml',
 	'README.md',
-	'LICENSE.md',
-	'CONTRIBUTING.md',
-	'CHANGELOG.md',
-	'web/app/uploads',
-	"$theme_directory/assets/js",
-	"$theme_directory/assets/scss",
-	"$theme_directory/gulpfile.babel.js",
-	"$theme_directory/gulpvars.js",
-	"$theme_directory/node_modules",
-	"$theme_directory/package.json",
-	"$theme_directory/bower.json",
-	"$theme_directory/composer.json",
-	"$theme_directory/composer.lock",
-	"$theme_directory/devvars.js",
-	"$theme_directory/.bowerrc",
-	"$theme_directory/.gitignore",
-	"$theme_directory/bin",
-	"$theme_directory/tests",
-	"web/app/plugins/timber/cache",
-
-	// W3 Total Cache junk
-	'web/app/advanced-cache.php',
-	'web/app/cache',
-	'web/app/object-cache.php',
-	'web/app/db.php',
-	'web/app/w3tc-config',
-	'web/app/plugins/w3tc-wp-loader.php',
-
-	// WP Super Cache Junk
-	'web/app/wp-cache-config.php',
-
 );
 
 ////////////////////////
@@ -76,12 +43,8 @@ function build_rysnc_exclusion(array $excluded_files){
 
 $excluded_files_string = build_rysnc_exclusion($excluded_files);
 
-$create_dir = "sudo mkdir $remote_directory";
 $change_ownership_to_user = "sudo chown -R {$ssh_user}: $remote_directory";
 $change_ownership_to_apache = "sudo chown -R apache: $remote_directory";
-
-echo '** Building Project **' . "\r\n";
-echo shell_exec("php build-project.php");
 
 echo '** Starting deployment process **' . "\r\n";
 
