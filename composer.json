@@ -11,6 +11,7 @@
         "twig/twig": "^2.4",
         "klein/klein": "^2.1",
         "vlucas/phpdotenv": "^2.4",
-        "catfan/Medoo": "^1.4"
+        "catfan/Medoo": "^1.4",
+        "wp-api/discovery": "dev-master"
     }
 }

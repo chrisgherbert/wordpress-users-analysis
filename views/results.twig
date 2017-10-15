@@ -2,7 +2,7 @@
 
 {% block content %}
 
-	<h4>Data for {{ url }}</h4>
+	<h4>Data for {{ site.name }} ({{ site.url }})</h4>
 
 	{% if error %}
 		<div class="alert alert-danger">
@@ -13,12 +13,12 @@
 	<hr>
 
 	<h4>
-		{% set users_length = users|length %}
+		{% set users_length = site.users|length %}
 
 		{% if users_length == 100 %}
-			Found {{ users|length }}+ Users
+			Found {{ users_length|length }}+ Users
 		{% else %}
-			Found {{ users|length }} Users
+			Found {{ users_length|length }} Users
 		{% endif %}
 
 	</h4>
@@ -28,21 +28,26 @@
 		<thead>
 
 			<tr>
+				<th>Avatar</th>
 				<th>Name</th>
 				<th>ID</th>
 				<th>Posts Link</th>
-				<th>Avatar</th>
 				<th>Description</th>
-				<th>Email</th>
+				<th>Email/Hash</th>
 			</tr>
 
 		</thead>
 
 		<tbody>
 
-			{% for user in users %}
+			{% for user in site.users %}
 
 				<tr>
+					<td>
+						<a href="{{ user.avatar(500) }}">
+							<img src="{{ user.avatar(30) }}">
+						</a>
+					</td>
 					<td><strong>{{ user.name }}</strong> ({{ user.slug }})</td>
 					<td>{{ user.id }}</td>
 					<td>
@@ -51,16 +56,9 @@
 						{% endif %}
 					</td>
 					<td>
-						{% if user.avatar_urls.48 %}
-							<a href="{{ user.avatar_urls.48|replace({'s=48': 's=800'}) }}">
-								<img src="{{ user.avatar_urls.48 }}">
-							</a>
-						{% endif %}
-					</td>
-					<td>
 						{{ user.description|raw }}
 					</td>
-					<td>{{ user.email }}</td>
+					<td>{{ user.email|default(user.email_hash) }}</td>
 				</tr>
 
 			{% endfor %}

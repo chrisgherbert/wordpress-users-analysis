@@ -4,7 +4,8 @@
 require_once('../vendor/autoload.php');
 
 // Load other files
-require_once('../classes/WordPressUsers.php');
+require_once('../classes/WordPressSite.php');
+require_once('../classes/WordPressUser.php');
 require_once('../classes/EmailHashReverser.php');
 
 // Twig
@@ -32,10 +33,8 @@ $router->respond('GET', '/search', function () use ($twig) {
 
 	$data['url'] = $_REQUEST['site_url'];
 
-	$data_getter = new WordPressUsers($data['url']);
-
 	try {
-		$data['users'] = $data_getter->get_data();
+		$data['site'] = new WordPressSite($data['url']);
 	} catch (Exception $e) {
 		$data['error'] = $e->getMessage();
 	}
