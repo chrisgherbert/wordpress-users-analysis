@@ -1,2 +1,4 @@
 /vendor
 .env
+/deploy-to-production.php
+/.phpintel
