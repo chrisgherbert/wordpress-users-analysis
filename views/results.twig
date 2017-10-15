@@ -12,7 +12,16 @@
 
 	<hr>
 
-	<h4>Found {{ users|length }} Users</h4>
+	<h4>
+		{% set users_length = users|length %}
+
+		{% if users_length == 100 %}
+			Found {{ users|length }}+ Users
+		{% else %}
+			Found {{ users|length }} Users
+		{% endif %}
+
+	</h4>
 
 	<table class="table">
 
