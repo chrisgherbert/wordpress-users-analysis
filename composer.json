@@ -7,7 +7,7 @@
         }
     ],
     "require": {
-        "curl/curl": "^1.8",
+        "php-curl-class/php-curl-class": "^7.4",
         "twig/twig": "^2.4",
         "klein/klein": "^2.1",
         "vlucas/phpdotenv": "^2.4",

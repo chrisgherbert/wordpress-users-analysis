@@ -7,19 +7,25 @@ require_once('../vendor/autoload.php');
 require_once('../classes/WordPressSite.php');
 require_once('../classes/WordPressUser.php');
 require_once('../classes/EmailHashReverser.php');
+require_once('../classes/WordPressDataCollection.php');
+require_once('../classes/WordPressUsersCollection.php');
 
 // Twig
 $twig_loader = new Twig_Loader_Filesystem('../views');
-$twig = new Twig_Environment($twig_loader, array(
-	'debug' => true
-));
+$twig = new Twig_Environment($twig_loader);
+$twig->addExtension(new Twig_Extension_Debug());
+$twig->enableDebug();
 
 // Load .env
 $dotenv = new \Dotenv\Dotenv(__DIR__ . '/..');
 $dotenv->load();
 
-// Routes
+// Router
 $router = new \Klein\Klein();
+
+////////////
+// Routes //
+////////////
 
 // Home Page
 $router->respond('GET', '/', function () use ($twig) {
@@ -34,7 +40,17 @@ $router->respond('GET', '/search', function () use ($twig) {
 	$data['url'] = $_REQUEST['site_url'];
 
 	try {
+
+		// Site data
 		$data['site'] = new WordPressSite($data['url']);
+
+		// Users data
+		$data['users_collection'] = new WordPressUsersCollection(
+			$data['url'],
+			$data['site']->get_users_endpoint_url(),
+			$_REQUEST['page'] ?? 1
+		);
+
 	} catch (Exception $e) {
 		$data['error'] = $e->getMessage();
 	}

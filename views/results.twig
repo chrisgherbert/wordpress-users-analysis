@@ -2,7 +2,13 @@
 
 {% block content %}
 
-	<h4>Data for {{ site.name }} ({{ site.url }})</h4>
+	<h4>
+
+		Data for {{ site.name }} ({{ site.url }})
+
+		{% if users_collection.current_page > 1 %} <small>(page {{ users_collection.current_page }})</small> {% endif %}
+
+	</h4>
 
 	{% if error %}
 		<div class="alert alert-danger">
@@ -13,15 +19,26 @@
 	<hr>
 
 	<h4>
-		{% set users_length = site.users|length %}
-
-		{% if users_length == 100 %}
-			Found {{ users_length }}+ Users
-		{% else %}
-			Found {{ users_length }} Users
-		{% endif %}
-
+		Found {{ users_collection.total_items }} Users
 	</h4>
+
+	{% if users_collection.total_pages > 1 %}
+
+		<ul class="pagination">
+
+			{% for page in users_collection.pagination %}
+
+				<li {% if page.current %}class="active"{% endif %}>
+					<a href="{{ page.url }}">
+						{{ page.num }}
+					</a>
+				</li>
+
+			{% endfor %}
+
+		</ul>
+
+	{% endif %}
 
 	<table class="table">
 
@@ -40,7 +57,7 @@
 
 		<tbody>
 
-			{% for user in site.users %}
+			{% for user in users_collection.users %}
 
 				<tr {% if user.email %}class="success"{% endif %}>
 					<td>
@@ -66,5 +83,23 @@
 		</tbody>
 
 	</table>
+
+	{% if users_collection.total_pages > 1 %}
+
+		<ul class="pagination">
+
+			{% for page in users_collection.pagination %}
+
+				<li {% if page.current %}class="active"{% endif %}>
+					<a href="{{ page.url }}">
+						{{ page.num }}
+					</a>
+				</li>
+
+			{% endfor %}
+
+		</ul>
+
+	{% endif %}
 
 {% endblock %}

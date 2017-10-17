@@ -6,44 +6,11 @@ class WordPressSite {
 
 	public $url;
 	public $site;
-	protected $users;
+	protected $users_collection;
 
 	public function __construct($url){
 		$this->url = $url;
 		$this->site = $this->get_site_obj();
-	}
-
-	public function users(){
-
-		if (isset($this->users)){
-			return $this->users;
-		}
-
-		$curl = self::get_curl();
-
-		$endpoint = $this->get_users_endpoint_url() . '?' . http_build_query(['per_page' => 100]);
-
-		$curl->get($endpoint);
-
-		if ($curl->error) {
-			error_log('Error: ' . $curl->error_code . ': ' . $curl->error_message);
-		}
-		else {
-
-			$data = json_decode($curl->response);
-
-			$users = array();
-
-			foreach ($data as $item){
-				$users[] = new WordPressUser($item);
-			}
-
-			$this->users = $users;
-
-			return $this->users;
-
-		}
-
 	}
 
 	public function get_comments_endpoint_url(){
@@ -106,7 +73,8 @@ class WordPressSite {
 			return $this->site;
 		}
 
-		$site = \WordPress\Discovery\discover($this->url);
+		// Silencing errors because the WordPress discovery tool is pretty sloppy. Tsk.
+		$site = @\WordPress\Discovery\discover($this->url);
 
 		$this->site = $site;
 
