@@ -1,6 +1,7 @@
 <?php
 
-use Medoo\Medoo;
+use Zend\Db\Sql\Sql;
+use Zend\Db\Adapter\Adapter;
 
 class EmailHashReverser {
 
@@ -14,15 +15,13 @@ class EmailHashReverser {
 
 		$db = self::get_db_instance();
 
-		$data = $db->select(
-			'emails',
-			['emails'],
-			[
-				'hash[=]' => $this->hash
-			]
-		);
+		$statement = $db->prepare("SELECT emails FROM emails WHERE hash = :hash");
 
-		return $data[0]['emails'] ?? false;
+		$statement->execute(['hash' => $this->hash]);
+
+		$results = $statement->fetch();
+
+		return $results['emails'] ?? false;
 
 	}
 
@@ -44,18 +43,27 @@ class EmailHashReverser {
 
 		if (!$emails_hash_db){
 
-			$emails_hash_db = new Medoo([
-				'database_type' => 'mysql',
-				'database_name' => getenv('EMAIL_HASH_DB_NAME'),
-				'server' => getenv('EMAIL_HASH_DB_HOST'),
-				'username' => getenv('EMAIL_HASH_DB_USER'),
-				'password' => getenv('EMAIL_HASH_DB_PASS')
-			]);
+			$name = getenv('EMAIL_HASH_DB_NAME');
+			$host = getenv('EMAIL_HASH_DB_HOST');
+			$user = getenv('EMAIL_HASH_DB_USER');
+			$pass = getenv('EMAIL_HASH_DB_PASS');
+			$dsn = "mysql:dbname=$name; host=$host";
+
+			$options = [
+				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
+			];
+
+			$db = new PDO($dsn, $user, $pass, $options);
+
+			$emails_hash_db = $db;
 
 		}
 
 		return $emails_hash_db;
 
 	}
+
+
 
 }
