@@ -4,7 +4,7 @@
 
 	<h4>
 
-		Data for {{ site.name }} ({{ site.url }})
+		Data for {{ site.name|default(site.url) }}
 
 		{% if users_collection.current_page > 1 %} <small>(page {{ users_collection.current_page }})</small> {% endif %}
 
@@ -19,7 +19,7 @@
 	<hr>
 
 	<h4>
-		Found {{ users_collection.total_items }} Users
+		Found {{ users_collection.total_items|number_format }} Users
 	</h4>
 
 	{% if users_collection.total_pages > 1 %}
