@@ -11,9 +11,6 @@
         "twig/twig": "^2.4",
         "klein/klein": "^2.1",
         "vlucas/phpdotenv": "^2.4",
-        "catfan/Medoo": "^1.4",
-        "wp-api/discovery": "dev-master",
-        "zendframework/zend-db": "^2.8",
-        "joshcam/mysqli-database-class": "^2.8"
+        "wp-api/discovery": "dev-master"
     }
 }

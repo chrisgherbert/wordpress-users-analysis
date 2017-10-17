@@ -4,67 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "aede3ff1de3f63a5c5a38cd610ff8059",
+    "content-hash": "8e4ad64137b8b862f0415ec8e79d190d",
     "packages": [
-        {
-            "name": "catfan/medoo",
-            "version": "v1.4.5",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/catfan/Medoo.git",
-                "reference": "8ee8ae1c4df0fee3822a01333eab88893e548fcc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/catfan/Medoo/zipball/8ee8ae1c4df0fee3822a01333eab88893e548fcc",
-                "reference": "8ee8ae1c4df0fee3822a01333eab88893e548fcc",
-                "shasum": ""
-            },
-            "require": {
-                "ext-pdo": "*",
-                "php": ">=5.4"
-            },
-            "suggest": {
-                "ext-pdo_dblib": "For MSSQL or Sybase database on Linux/UNIX platform",
-                "ext-pdo_mysql": "For MySQL or MariaDB database",
-                "ext-pdo_oci": "For Oracle database",
-                "ext-pdo_oci8": "For Oracle version 8 database",
-                "ext-pdo_pqsql": "For PostgreSQL database",
-                "ext-pdo_sqlite": "For SQLite database",
-                "ext-pdo_sqlsrv": "For MSSQL database on Windows platform"
-            },
-            "type": "framework",
-            "autoload": {
-                "psr-4": {
-                    "Medoo\\": "/src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Angel Lai",
-                    "email": "angel@catfan.me"
-                }
-            ],
-            "description": "The lightest PHP database framework to accelerate development",
-            "homepage": "https://medoo.in",
-            "keywords": [
-                "database",
-                "lightweight",
-                "mariadb",
-                "mssql",
-                "mysql",
-                "oracle",
-                "php framework",
-                "postgresql",
-                "sql",
-                "sqlite"
-            ],
-            "time": "2017-06-24T14:43:07+00:00"
-        },
         {
             "name": "curl/curl",
             "version": "1.8.0",
@@ -119,51 +60,6 @@
                 "dot"
             ],
             "time": "2017-08-12T11:44:08+00:00"
-        },
-        {
-            "name": "joshcam/mysqli-database-class",
-            "version": "v2.8",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/joshcam/PHP-MySQLi-Database-Class.git",
-                "reference": "3e33abfc8e6d689631249b403b368b91ceda5c14"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/joshcam/PHP-MySQLi-Database-Class/zipball/3e33abfc8e6d689631249b403b368b91ceda5c14",
-                "reference": "3e33abfc8e6d689631249b403b368b91ceda5c14",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "MysqliDb.php",
-                    "dbObject.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Josh Campbell",
-                    "email": "josh.lee.campbell@gmail.com",
-                    "homepage": "https://github.com/joshcam",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Alexander V. Butenko",
-                    "email": "a.butenka@gmail.com",
-                    "homepage": "http://smarttechdo.com",
-                    "role": "Developer"
-                }
-            ],
-            "description": "PHP MySQL Wrapper and object mapper which utilizes MySQLi and prepared statements",
-            "time": "2017-08-02T16:08:26+00:00"
         },
         {
             "name": "klein/klein",
@@ -272,16 +168,16 @@
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.5.0",
+            "version": "v1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803"
+                "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
-                "reference": "7c8fae0ac1d216eb54349e6a8baa57d515fe8803",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
+                "reference": "2ec8b39c38cb16674bbf3fea2b6ce5bf117e1296",
                 "shasum": ""
             },
             "require": {
@@ -293,7 +189,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.5-dev"
+                    "dev-master": "1.6-dev"
                 }
             },
             "autoload": {
@@ -327,7 +223,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2017-06-14T15:44:48+00:00"
+            "time": "2017-10-11T12:05:26+00:00"
         },
         {
             "name": "twig/twig",
@@ -476,108 +372,6 @@
                 "MIT"
             ],
             "time": "2015-12-08 13:07:17"
-        },
-        {
-            "name": "zendframework/zend-db",
-            "version": "2.8.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-db.git",
-                "reference": "5926a1a2e7e035546b690cb7d4c11a3c47db2c98"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-db/zipball/5926a1a2e7e035546b690cb7d4c11a3c47db2c98",
-                "reference": "5926a1a2e7e035546b690cb7d4c11a3c47db2c98",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.5 || ^7.0",
-                "zendframework/zend-stdlib": "^2.7 || ^3.0"
-            },
-            "require-dev": {
-                "fabpot/php-cs-fixer": "1.7.*",
-                "phpunit/phpunit": "~4.0",
-                "zendframework/zend-eventmanager": "^2.6.2 || ^3.0",
-                "zendframework/zend-hydrator": "^1.1 || ^2.1",
-                "zendframework/zend-servicemanager": "^2.7.5 || ^3.0.3"
-            },
-            "suggest": {
-                "zendframework/zend-eventmanager": "Zend\\EventManager component",
-                "zendframework/zend-hydrator": "Zend\\Hydrator component for using HydratingResultSets",
-                "zendframework/zend-servicemanager": "Zend\\ServiceManager component"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.8-dev",
-                    "dev-develop": "2.9-dev"
-                },
-                "zf": {
-                    "component": "Zend\\Db",
-                    "config-provider": "Zend\\Db\\ConfigProvider"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Db\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "homepage": "https://github.com/zendframework/zend-db",
-            "keywords": [
-                "db",
-                "zf2"
-            ],
-            "time": "2016-08-09T19:28:55+00:00"
-        },
-        {
-            "name": "zendframework/zend-stdlib",
-            "version": "3.1.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/zendframework/zend-stdlib.git",
-                "reference": "debedcfc373a293f9250cc9aa03cf121428c8e78"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/zendframework/zend-stdlib/zipball/debedcfc373a293f9250cc9aa03cf121428c8e78",
-                "reference": "debedcfc373a293f9250cc9aa03cf121428c8e78",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^5.6 || ^7.0"
-            },
-            "require-dev": {
-                "athletic/athletic": "~0.1",
-                "phpunit/phpunit": "~4.0",
-                "squizlabs/php_codesniffer": "^2.6.2"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.1-dev",
-                    "dev-develop": "3.2-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Zend\\Stdlib\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "homepage": "https://github.com/zendframework/zend-stdlib",
-            "keywords": [
-                "stdlib",
-                "zf2"
-            ],
-            "time": "2016-09-13T14:38:50+00:00"
         }
     ],
     "packages-dev": [],
