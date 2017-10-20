@@ -2,7 +2,7 @@
 
 use Curl\Curl;
 
-class WordPressDataCollection {
+abstract class WordPressDataCollection {
 
 	public $site_url;
 	public $endpoint_url;
@@ -21,7 +21,7 @@ class WordPressDataCollection {
 		$this->make_request();
 	}
 
-	public function users(){
+	abstract public function items(){
 
 		if ($this->data){
 
