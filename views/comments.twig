@@ -1,0 +1,93 @@
+{% extends 'results.twig' %}
+
+{% block results_pagination_top %}
+
+	{% if items.next_prev %}
+
+		<ul class="pagination">
+
+			{% for pager in items.next_prev %}
+
+				<li>
+					<a href="{{ pager.url }}">
+						{{ pager.name|raw }}
+					</a>
+				</li>
+
+			{% endfor %}
+
+		</ul>
+
+	{% endif %}
+
+{% endblock %}
+
+{% block results_items %}
+
+	<table class="table">
+
+		<thead>
+
+			<tr>
+				<th>Avatar</th>
+				<th>Name</th>
+				<th>ID</th>
+				<th>Link</th>
+				<th>Content</th>
+				<th>Email/Hash</th>
+			</tr>
+
+		</thead>
+
+		<tbody>
+
+			{% for comment in items.items %}
+
+				<tr {% if comment.email %}class="success"{% endif %}>
+					<td>
+						<a href="{{ comment.avatar(500) }}">
+							<img src="{{ comment.avatar(30) }}">
+						</a>
+					</td>
+					<td><strong>{{ comment.author_name }}</strong></td>
+					<td>{{ comment.id }}</td>
+					<td>
+						{% if comment.link %}
+							<a href="{{ comment.link }}">{{ comment.link }}</a>
+						{% endif %}
+					</td>
+					<td>
+						{{ comment.content|raw }}
+					</td>
+					<td>{{ comment.email|default(comment.email_hash) }}</td>
+				</tr>
+
+			{% endfor %}
+
+		</tbody>
+
+	</table>
+
+{% endblock %}
+
+{% block results_pagination_bottom %}
+
+	{% if items.next_prev %}
+
+		<ul class="pagination">
+
+			{% for pager in items.next_prev %}
+
+				<li>
+					<a href="{{ pager.url }}">
+						{{ pager.name|raw }}
+					</a>
+				</li>
+
+			{% endfor %}
+
+		</ul>
+
+	{% endif %}
+
+{% endblock %}

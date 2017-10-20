@@ -2,10 +2,23 @@
 
 {% block content %}
 
-	<form action="/search" method="GET">
+	<form action="/users" method="GET">
 
 		<div class="form-group">
-			<label for="site_url">Site URL</label>
+			<label for="site_url">Site URL (users)</label>
+			<input class="form-control" type="text" name="site_url" placeholder="http://site.com">
+		</div>
+
+		<button class="btn btn-primary" type="submit">Submit</button>
+
+	</form>
+
+	<hr />
+
+	<form action="/comments" method="GET">
+
+		<div class="form-group">
+			<label for="site_url">Site URL (comments)</label>
 			<input class="form-control" type="text" name="site_url" placeholder="http://site.com">
 		</div>
 

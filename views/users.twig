@@ -1,0 +1,49 @@
+{% extends 'results.twig' %}
+
+{% block results_items %}
+
+	<table class="table">
+
+		<thead>
+
+			<tr>
+				<th>Avatar</th>
+				<th>Name</th>
+				<th>ID</th>
+				<th>Posts Link</th>
+				<th>Description</th>
+				<th>Email/Hash</th>
+			</tr>
+
+		</thead>
+
+		<tbody>
+
+			{% for user in items.items %}
+
+				<tr {% if user.email %}class="success"{% endif %}>
+					<td>
+						<a href="{{ user.avatar(500) }}">
+							<img src="{{ user.avatar(30) }}">
+						</a>
+					</td>
+					<td><strong>{{ user.name }}</strong> ({{ user.slug }})</td>
+					<td>{{ user.id }}</td>
+					<td>
+						{% if user.link %}
+							<a href="{{ user.link }}">{{ user.link }}</a>
+						{% endif %}
+					</td>
+					<td>
+						{{ user.description|raw }}
+					</td>
+					<td>{{ user.email|default(user.email_hash) }}</td>
+				</tr>
+
+			{% endfor %}
+
+		</tbody>
+
+	</table>
+
+{% endblock %}

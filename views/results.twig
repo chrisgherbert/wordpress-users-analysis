@@ -2,104 +2,82 @@
 
 {% block content %}
 
-	<h4>
+	{% block results_header %}
 
-		Data for {{ site.name|default(site.url) }}
+		<h4>
 
-		{% if users_collection.current_page > 1 %} <small>(page {{ users_collection.current_page }})</small> {% endif %}
+			Data for {{ site.name|default(site.url) }}
 
-	</h4>
+			{% if items.current_page > 1 %} <small>(page {{ items.current_page }})</small> {% endif %}
 
-	{% if error %}
-		<div class="alert alert-danger">
-			{{ error }}
-		</div>
-	{% endif %}
+		</h4>
 
-	<hr>
+		{% if error %}
+			<div class="alert alert-danger">
+				{{ error }}
+			</div>
+		{% endif %}
 
-	<h4>
-		Found {{ users_collection.total_items|number_format }} Users
-	</h4>
+		<hr>
 
-	{% if users_collection.total_pages > 1 %}
+	{% endblock %}
 
-		<ul class="pagination">
+	{% block results_main %}
 
-			{% for page in users_collection.pagination %}
+		{% block results_count %}
 
-				<li {% if page.current %}class="active"{% endif %}>
-					<a href="{{ page.url }}">
-						{{ page.num }}
-					</a>
-				</li>
+			<h4>
+				Found {{ items.total_items|number_format }} Items
+			</h4>
 
-			{% endfor %}
+		{% endblock %}
 
-		</ul>
+		{% block results_pagination_top %}
 
-	{% endif %}
+			{% if items.total_pages > 1 %}
 
-	<table class="table">
+				<ul class="pagination">
 
-		<thead>
+					{% for page in items.pagination %}
 
-			<tr>
-				<th>Avatar</th>
-				<th>Name</th>
-				<th>ID</th>
-				<th>Posts Link</th>
-				<th>Description</th>
-				<th>Email/Hash</th>
-			</tr>
+						<li {% if page.current %}class="active"{% endif %}>
+							<a href="{{ page.url }}">
+								{{ page.num }}
+							</a>
+						</li>
 
-		</thead>
+					{% endfor %}
 
-		<tbody>
+				</ul>
 
-			{% for user in users_collection.items %}
+			{% endif %}
 
-				<tr {% if user.email %}class="success"{% endif %}>
-					<td>
-						<a href="{{ user.avatar(500) }}">
-							<img src="{{ user.avatar(30) }}">
-						</a>
-					</td>
-					<td><strong>{{ user.name }}</strong> ({{ user.slug }})</td>
-					<td>{{ user.id }}</td>
-					<td>
-						{% if user.link %}
-							<a href="{{ user.link }}">{{ user.link }}</a>
-						{% endif %}
-					</td>
-					<td>
-						{{ user.description|raw }}
-					</td>
-					<td>{{ user.email|default(user.email_hash) }}</td>
-				</tr>
+		{% endblock %}
 
-			{% endfor %}
+		{% block results_items %}{% endblock %}
 
-		</tbody>
+		{% block results_pagination_bottom %}
 
-	</table>
+			{% if items.total_pages > 1 %}
 
-	{% if users_collection.total_pages > 1 %}
+				<ul class="pagination">
 
-		<ul class="pagination">
+					{% for page in items.pagination %}
 
-			{% for page in users_collection.pagination %}
+						<li {% if page.current %}class="active"{% endif %}>
+							<a href="{{ page.url }}">
+								{{ page.num }}
+							</a>
+						</li>
 
-				<li {% if page.current %}class="active"{% endif %}>
-					<a href="{{ page.url }}">
-						{{ page.num }}
-					</a>
-				</li>
+					{% endfor %}
 
-			{% endfor %}
+				</ul>
 
-		</ul>
+			{% endif %}
 
-	{% endif %}
+		{% endblock %}
+
+	{% endblock %}
 
 {% endblock %}

@@ -15,23 +15,29 @@ class WordPressSite {
 
 	public function get_comments_endpoint_url(){
 
-		if ($this->site){
-			return $this->get_index_url() . 'wp/v2/comments';
+		if ($this->get_index_url()){
+			$endpoint = $this->get_index_url() . 'wp/v2/comments';
 		}
+		else {
+			$parts = parse_url($this->url);
+			$endpoint = $parts['scheme'] . '://' . $parts['host'] . '/wp-json/wp/v2/comments';
+		}
+
+		return $endpoint;
 
 	}
 
 	public function get_users_endpoint_url(){
 
 		if ($this->get_index_url()){
-			$users_endpoint = $this->get_index_url() . 'wp/v2/users';
+			$endpoint = $this->get_index_url() . 'wp/v2/users';
 		}
 		else {
 			$parts = parse_url($this->url);
-			$users_endpoint = $parts['scheme'] . '://' . $parts['host'] . '/wp-json/wp/v2/users';
+			$endpoint = $parts['scheme'] . '://' . $parts['host'] . '/wp-json/wp/v2/users';
 		}
 
-		return $users_endpoint;
+		return $endpoint;
 
 	}
 

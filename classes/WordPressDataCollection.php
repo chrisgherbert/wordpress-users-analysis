@@ -21,13 +21,43 @@ abstract class WordPressDataCollection {
 		$this->make_request();
 	}
 
-	abstract public function items(){
+	abstract public function items();
 
-		if ($this->data){
+	abstract public function app_url_slug();
 
-			return array_map(function($item){
-				return new WordPressUser($item);
-			}, $this->data);
+	public function next_prev(){
+
+		if ($this->total_pages() > 1){
+
+			$items = array();
+
+			$app_url_slug = $this->app_url_slug();
+
+			if ($this->page != 1){
+
+				$items[] = array(
+					'name' => '&larr; Previous',
+					'url' => "/$app_url_slug?" . http_build_query([
+						'site_url' => $this->site_url,
+						'page' => $this->page - 1
+					])
+				);
+
+			}
+
+			if ($this->total_pages() != $this->page){
+
+				$items[] = array(
+					'name' => 'Next &rarr;',
+					'url' => "/$app_url_slug?" . http_build_query([
+						'site_url' => $this->site_url,
+						'page' => $this->page + 1
+					])
+				);
+
+			}
+
+			return $items;
 
 		}
 
@@ -39,11 +69,13 @@ abstract class WordPressDataCollection {
 
 			$pages = array();
 
+			$app_url_slug = $this->app_url_slug();
+
 			foreach (range(1, $this->total_pages()) as $page_num){
 
 				$pages[] = [
 					'num' => $page_num,
-					'url' => '/search?' . http_build_query([
+					'url' => "/$app_url_slug?" . http_build_query([
 						'site_url' => $this->site_url,
 						'page' => $page_num
 					]),

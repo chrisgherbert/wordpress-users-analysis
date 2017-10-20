@@ -1,9 +1,9 @@
 <?php
 
-class WordPressUsersCollection extends WordPressDataCollection {
+class WordPressCommentsCollection extends WordPressDataCollection {
 
 	public function app_url_slug(){
-		return 'users';
+		return 'comments';
 	}
 
 	public function items(){
@@ -11,7 +11,7 @@ class WordPressUsersCollection extends WordPressDataCollection {
 		if ($this->data){
 
 			return array_map(function($item){
-				return new WordPressUser($item);
+				return new WordPressComment($item);
 			}, $this->data);
 
 		}
